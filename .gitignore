@@ -1,3 +1,8 @@
+.DS_Store
+.ipynb_checkpoints
+environment.yml
+
+
 *.wav
 *.png
 *.mp4
