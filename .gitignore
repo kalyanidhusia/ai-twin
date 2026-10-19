@@ -1,7 +1,9 @@
+archive/
+
 .DS_Store
 .ipynb_checkpoints
 environment.yml
-
+*tar.gz
 
 *.wav
 *.png
