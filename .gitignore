@@ -8,3 +8,6 @@ environment.yml
 *.wav
 *.png
 *.mp4
+media/
+archive/
+*.tar.gz
