@@ -81,6 +81,11 @@
 - Rung 2 (self-reconstruction: base video + its own audio) rendered on CPU and verified against the original frame-by-frame: clean lip edges, convincing teeth, no jaw seam or box artifact; only slight mouth-region softness. Full avatar pipeline proven local, $0.
 - Remaining: rung 3 — base video + CLONED Hindi/English audio = the actual twin.
 
+### 2026-10-19 — first upstream contribution 🎉
+- Filed [TMElyralab/MuseTalk#427](https://github.com/TMElyralab/MuseTalk/issues/427): `download_weights.sh` broken with current gdown (`--id` flag removed), with verified one-line fix and PR offer. Searched for duplicates first — the one "gdown" hit (#334) was an unrelated GPU thread matching on a comment.
+- Giving-back loop now runs both ways: this repo credits upstream (ACKNOWLEDGMENTS.md); upstream's tracker now carries our find.
+- Pending: macOS build-notes issue (clang flag + mmcv recipe) after bbox_shift tuning settles; PR for #427 if maintainers welcome it.
+
 ### next up
 - [ ] Push repo (private) to GitHub
 - [ ] Prepare the 72s English sample with `prepare_audio.sh` (third reference option)
