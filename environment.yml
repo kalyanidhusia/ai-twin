@@ -1,0 +1,15 @@
+# AI Twin — local prep environment (macOS, Apple Silicon or Intel)
+# Usage: conda env create -f environment.yml && conda activate ai-twin
+# This env covers data prep (audio/video) on your Mac.
+# GPU steps (GPT-SoVITS training, MuseTalk inference) run elsewhere — see docs/JOURNEY.md.
+name: ai-twin
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - ffmpeg>=6
+  - pip
+  - pip:
+      - soundfile
+      - librosa
+      - openai-whisper   # local transcription for subtitles later ($0)

@@ -1,0 +1,18 @@
+# AI Twin — voice cloning env (local, macOS)
+# Usage (the CONDA_SUBDIR prefix matters on Apple Silicon — see README):
+#   CONDA_SUBDIR=osx-arm64 conda env create -f environment-voice.yml
+#   conda activate ai-twin-voice
+#   jupyter lab
+# Separate from the prep env on purpose: chatterbox pins its own torch,
+# and keeping it isolated means one broken dependency never kills both.
+name: ai-twin-voice
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - ffmpeg>=6
+  - setuptools<81   # perth (chatterbox's watermarker) needs pkg_resources, removed in newer setuptools
+  - pip
+  - jupyterlab
+  - pip:
+      - chatterbox-tts
