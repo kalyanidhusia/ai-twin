@@ -4,6 +4,8 @@ archive/
 .ipynb_checkpoints
 environment.yml
 *tar.gz
+*.docx
+
 
 *.wav
 *.png

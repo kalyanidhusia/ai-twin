@@ -86,6 +86,11 @@
 - Giving-back loop now runs both ways: this repo credits upstream (ACKNOWLEDGMENTS.md); upstream's tracker now carries our find.
 - Pending: macOS build-notes issue (clang flag + mmcv recipe) after bbox_shift tuning settles; PR for #427 if maintainers welcome it.
 
+### 2026-10-20 — tuning + toon + new bases
+- bbox_shift sweep verdict: **−5 beats +5 and 0** on the handheld base — matches the measured symptom (mouth open during audio pauses → negative shift reduces openness). −5 is the starting point for new bases, re-bisect per base since framing moves the optimum.
+- Toon experiment: MuseTalk accepted a DreamWorks-style AI portrait as input (their own monalisa.png demo foreshadowed it) — mouth articulates, style preserved, lip color desaturated (known limitation), head frozen (still-image route). Cartoon twin = viable bonus format; toon *video* base is the future upgrade.
+- Two fresh purpose-shot bases (one Hindi speech, one English) in hand → full v2 pipeline run: new natural-speech voice references harvested from their audio, language-matched base/audio pairing, renders at shift −5.
+
 ### next up
 - [ ] Push repo (private) to GitHub
 - [ ] Prepare the 72s English sample with `prepare_audio.sh` (third reference option)
