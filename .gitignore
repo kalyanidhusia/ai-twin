@@ -6,6 +6,7 @@ environment.yml
 *tar.gz
 *.docx
 
+*orig*
 
 *.wav
 *.png

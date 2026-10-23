@@ -65,7 +65,7 @@
 - Tutorial fix list for the notebook: add `setuptools<81` to environment-voice.yml pip deps; keep the perth fix cell as a self-diagnosing guard.
 
 ### 2026-10-18 (21:23) — ✅ MILESTONE: voice clone works, both languages
-- After the setuptools fix: English and Hindi smoke-test outputs both judged **great** by Kalyani's own ear. The voice half of the twin is proven — $0, local Mac, zero-shot, no cloud.
+- After the setuptools fix: English and Hindi smoke-test outputs both judged **great** by Kalyani. The voice half of the twin is proven — $0, local Mac, zero-shot, no cloud.
 - Repo-ready: README, `.gitignore` (hard-blocks all audio/image/video — voice samples are biometric identity and never get committed), fixes folded into `environment-voice.yml` (setuptools<81, CONDA_SUBDIR note) and the notebook (perth self-check cell). Plan: private GitHub repo now, public when the tutorial is approved.
 
 ### 2026-10-18 (late) — base video QC'd + local avatar path chosen
@@ -92,9 +92,9 @@
 - Two fresh purpose-shot bases (one Hindi speech, one English) in hand → full v2 pipeline run: new natural-speech voice references harvested from their audio, language-matched base/audio pairing, renders at shift −5.
 
 ### next up
-- [ ] Push repo (private) to GitHub
-- [ ] Prepare the 72s English sample with `prepare_audio.sh` (third reference option)
-- [ ] Render the FULL pilot scripts (EN + HI) with the working voice — memory slot still awaits
-- [ ] Shoot/trim one static 60–90s chest-up base video → `check_base_video.sh`
-- [ ] Avatar step (SadTalker portrait route first) — needs CUDA → NRP or Colab
+- [x] Push repo (private) to GitHub
+- [x] Prepare the 72s English sample with `prepare_audio.sh` (third reference option)
+- [x] Render the FULL pilot scripts (EN + HI) with the working voice — memory slot still awaits
+- [x] Shoot/trim one static 60–90s chest-up base video → `check_base_video.sh`
+- [x] Avatar step (SadTalker portrait route first) — needs CUDA → NRP or Colab
 - [ ] Optional quality ladder if wanted: Chatterbox V3 / dedicated Hindi finetune
