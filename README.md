@@ -12,14 +12,6 @@ dead ends are documented on purpose, in [docs/JOURNEY.md](docs/JOURNEY.md).
 ## See it in action
 
 
-
-
-https://github.com/user-attachments/assets/085ba370-8a09-4067-b3a1-31053372e6b4
-
-
-
-
-
 <!--
   HOW TO FILL THIS IN — without ever committing a video/audio file to git:
   1. Edit this file on github.com (pencil icon).
