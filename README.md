@@ -1,3 +1,4 @@
+
 # ai-twin — clone your own voice and face for $0
 
 Build a bilingual (English + Hindi) AI twin of yourself with open-source tools,
@@ -9,6 +10,11 @@ dead ends are documented on purpose, in [docs/JOURNEY.md](docs/JOURNEY.md).
 `bbox_shift` sweep) · full bilingual pilot videos in progress.
 
 ## See it in action
+
+
+https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629
+
+
 
 <!--
   HOW TO FILL THIS IN — without ever committing a video/audio file to git:
@@ -33,9 +39,9 @@ dead ends are documented on purpose, in [docs/JOURNEY.md](docs/JOURNEY.md).
 <th>AI twin — toon</th>
 </tr>
 <tr>
-<td><video src="PASTE_BASE_VIDEO_URL_HERE" controls width="260"></video></td>
-<td><video src="PASTE_HUMAN_TWIN_URL_HERE" controls width="260"></video></td>
-<td><video src="PASTE_TOON_TWIN_URL_HERE" controls width="260"></video></td>
+<td><video src="https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629" controls width="260"></video></td>
+<td><video src="https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629" controls width="260"></video></td>
+<td><video src="https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629" controls width="260"></video></td>
 </tr>
 <tr>
 <td>Real footage, unmodified</td>
