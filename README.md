@@ -12,7 +12,11 @@ dead ends are documented on purpose, in [docs/JOURNEY.md](docs/JOURNEY.md).
 ## See it in action
 
 
-https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629
+
+
+https://github.com/user-attachments/assets/085ba370-8a09-4067-b3a1-31053372e6b4
+
+
 
 
 
@@ -32,6 +36,8 @@ https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629
   only do this with footage/audio you're fine sharing.
 -->
 
+
+
 <table>
 <tr>
 <th>Base video</th>
@@ -39,8 +45,8 @@ https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629
 <th>AI twin — toon</th>
 </tr>
 <tr>
-<td><video src="https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629" controls width="260"></video></td>
-<td><video src="https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629" controls width="260"></video></td>
+<td><video src="https://github.com/user-attachments/assets/4c2e3731-9b3d-476c-bd8d-665b5b5613b9" controls width="260"></video></td>
+<td><video src="https://github.com/user-attachments/assets/085ba370-8a09-4067-b3a1-31053372e6b4" controls width="260"></video></td>
 <td><video src="https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629" controls width="260"></video></td>
 </tr>
 <tr>
