@@ -1,0 +1,18 @@
+# AI Twin — motion-driver env (local, macOS, Apple Silicon)
+# Usage:
+#   CONDA_SUBDIR=osx-arm64 conda env create -f environment-motion.yml
+#   conda activate ai-twin-motion
+#   conda config --env --set subdir osx-arm64
+#   cd motion && ./setup_motion_mac.sh
+#
+# Separate from ai-twin-avatar on purpose, same reason as the voice env:
+# LivePortrait pins its own torch build, and an isolated env means a broken
+# pin here can't take down the MuseTalk pipeline that already works.
+name: ai-twin-motion
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - ffmpeg>=6
+  - git
+  - pip
