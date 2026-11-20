@@ -1,3 +1,4 @@
+
 # ai-twin — clone your own voice and face for $0
 
 Build a bilingual (English + Hindi) AI twin of yourself with open-source tools,
@@ -10,6 +11,7 @@ dead ends are documented on purpose, in [docs/JOURNEY.md](docs/JOURNEY.md).
 progress · full bilingual pilot videos in progress.
 
 ## See it in action
+
 
 <!--
   HOW TO FILL THIS IN — without ever committing a video/audio file to git:
@@ -30,6 +32,8 @@ progress · full bilingual pilot videos in progress.
   width) on every <video>, matching your clips' real aspect ratio, or they'll
   stretch. These three are portrait phone clips (~9:16), hence 260x462.
 -->
+
+
 
 <table>
 <tr>
