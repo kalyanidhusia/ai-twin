@@ -9,7 +9,7 @@ environment.yml
 *orig*
 
 *.wav
-*.png
+
 *.mp4
 media/
 archive/

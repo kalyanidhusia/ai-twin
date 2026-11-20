@@ -1,0 +1,34 @@
+# ── IDENTITY PROTECTION — never commit, even to a private repo ──
+# Voice samples and generated audio are biometric data: anyone with them
+# can clone the voice. Photos/video of the speaker likewise.
+raw/
+prepared/voice/
+prepared/portrait*.png
+out/
+frames/
+*.wav
+*.m4a
+*.mp3
+*.mp4
+*.mov
+*.jpg
+*.jpeg
+
+# ── upstream repos & their weights — cloned by setup scripts, never vendored ──
+avatar/MuseTalk/
+motion/LivePortrait/
+# ── local media staging (identity protection, same as raw/) ──
+avatar/inputs/
+clip/
+media/
+# note: the blanket *.png/*.jpg rule above also catches toon portrait images
+# (media/toon/) by default, even though those aren't anyone's real likeness.
+# If you want example portraits visible in the public repo, add a targeted
+# !media/toon/*.png exception rather than removing the blanket rule.
+
+# ── machine noise ──
+.DS_Store
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.cache/
