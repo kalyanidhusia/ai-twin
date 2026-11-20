@@ -6,7 +6,8 @@ anyone's cloud. This repo is both a working pipeline and a journey log — the
 dead ends are documented on purpose, in [docs/JOURNEY.md](docs/JOURNEY.md).
 
 **Status:** voice cloning works · avatar lip-sync works (tuned via a
-`bbox_shift` sweep) · full bilingual pilot videos in progress.
+`bbox_shift` sweep) · moving toon avatar (LivePortrait motion stage) in
+progress · full bilingual pilot videos in progress.
 
 ## See it in action
 
@@ -19,11 +20,15 @@ dead ends are documented on purpose, in [docs/JOURNEY.md](docs/JOURNEY.md).
   3. GitHub uploads it to its own asset host and inserts a link that looks like
      https://user-images.githubusercontent.com/<id>/<name>.mp4 (or
      https://github.com/user-attachments/assets/<id>).
-  4. Copy that URL into the matching src= below, then replace this comment.
+  4. Copy that URL into the matching src= below.
   The file never enters git history this way — it's hosted by GitHub's asset
   CDN, not tracked as a repo blob. Same privacy rule as everywhere else in
   this repo: the clip is still becoming public the moment you upload it, so
   only do this with footage/audio you're fine sharing.
+  Uniform sizing: GitHub strips inline style="" from README HTML, so
+  object-fit cropping isn't available — set BOTH width and height (not just
+  width) on every <video>, matching your clips' real aspect ratio, or they'll
+  stretch. These three are portrait phone clips (~9:16), hence 260x462.
 -->
 
 <table>
@@ -33,9 +38,9 @@ dead ends are documented on purpose, in [docs/JOURNEY.md](docs/JOURNEY.md).
 <th>AI twin — toon</th>
 </tr>
 <tr>
-<td><video src="PASTE_BASE_VIDEO_URL_HERE" controls width="260"></video></td>
-<td><video src="PASTE_HUMAN_TWIN_URL_HERE" controls width="260"></video></td>
-<td><video src="PASTE_TOON_TWIN_URL_HERE" controls width="260"></video></td>
+<td><video src="https://github.com/user-attachments/assets/4c2e3731-9b3d-476c-bd8d-665b5b5613b9" controls width="260" height="462"></video></td>
+<td><video src="https://github.com/user-attachments/assets/085ba370-8a09-4067-b3a1-31053372e6b4" controls width="260" height="462"></video></td>
+<td><video src="https://github.com/user-attachments/assets/6bbce3db-d367-4535-ac81-2ef5cd20a629" controls width="260" height="462"></video></td>
 </tr>
 <tr>
 <td>Real footage, unmodified</td>
@@ -59,21 +64,21 @@ stacked vertically instead.*
 
 ## Quick start — voice
 ```bash
-# 1. prep env (audio cleanup tools)
-conda env create -f environment.yml
-
-# 2. voice env — the CONDA_SUBDIR prefix is REQUIRED on Apple Silicon if your
-#    conda is the Intel build (check: `uname -m` vs `python -c "import platform; print(platform.machine())"`)
+# voice env — the CONDA_SUBDIR prefix is REQUIRED on Apple Silicon if your
+# conda is the Intel build (check: `uname -m` vs `python -c "import platform; print(platform.machine())"`)
 CONDA_SUBDIR=osx-arm64 conda env create -f environment-voice.yml
 conda activate ai-twin-voice
 conda config --env --set subdir osx-arm64
 
-# 3. clean your recordings into training-ready WAVs
+# clean your recordings into training-ready WAVs (pure ffmpeg, no python deps)
 ./scripts/prepare_audio.sh my_recording.m4a prepared/voice/my_sample.wav
 
-# 4. run the notebook
+# run the notebook
 jupyter lab   # open colab/local_voice_clone.ipynb, Run All
 ```
+*(An earlier separate `environment.yml` "prep env" is archived — nothing
+current needs it; audio prep is plain ffmpeg. It'll come back if the Whisper
+subtitle step gets built out.)*
 
 ## Quick start — avatar (lip-synced video)
 ```bash
@@ -90,31 +95,50 @@ caffeinate -i ./run_avatar_mac.sh your_video.mp4 your_cloned_audio.wav twin_v1 -
 # if your footage differs, the run prints a suggested range to try instead.
 ```
 
+## Quick start — moving toon avatar (in progress)
+Adds real head/expression motion to a toon portrait *before* MuseTalk
+lip-syncs it, via [LivePortrait](https://github.com/KwaiVGI/LivePortrait).
+Not yet verified end-to-end — see `docs/JOURNEY.md` for the current state.
+```bash
+CONDA_SUBDIR=osx-arm64 conda env create -f motion/environment-motion.yml
+conda activate ai-twin-motion
+conda config --env --set subdir osx-arm64
+cd motion && ./setup_motion_mac.sh
+
+# animate a toon portrait using a real talking-head clip as the motion source
+./run_motion_mac.sh ../media/toon/your_portrait.png ../media/base/your_clip.mp4 label_v1
+```
+
 ## The stack (all free)
 | Piece | Tool | License |
 |---|---|---|
 | Voice clone (23 languages incl. Hindi) | [Chatterbox Multilingual](https://github.com/resemble-ai/chatterbox) (Resemble AI) | MIT (models included) |
 | Lip-synced avatar | [MuseTalk](https://github.com/TMElyralab/MuseTalk) (TMElyralab) | MIT code; models usable commercially |
+| Toon avatar motion (in progress) | [LivePortrait](https://github.com/KwaiVGI/LivePortrait) (KwaiVGI) | MIT code/weights; its InsightFace face-detection dependency is non-commercial-research-only |
 | Audio/video prep | ffmpeg | LGPL/GPL |
 | Subtitles (coming) | Whisper | MIT |
 
 Strengths and weaknesses we actually hit for each (not marketing copy —
-field notes): [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md)
+field notes): [docs/ACKNOWLEDGMENTS.md](docs/ACKNOWLEDGMENTS.md)
 
 ## Repo layout
 ```
 ai-twin/
-├── colab/        # voice-clone notebooks — run locally in Jupyter, not Colab
-│                 #   (name is a holdover from the very first attempt;
-│                 #    see docs/JOURNEY.md)
-├── avatar/       # MuseTalk setup + render scripts for macOS (CPU)
-├── scripts/      # audio/video prep utilities
-├── docs/JOURNEY.md        # the full build log — dead ends included, dated
-├── ACKNOWLEDGMENTS.md     # every upstream project this depends on, credited honestly
-├── environment.yml        # prep env (conda)
-└── environment-voice.yml  # voice-clone env (conda)
+├── avatar/        # MuseTalk setup + render scripts for macOS (CPU)
+├── motion/        # LivePortrait setup + render scripts (moving toon avatar, in progress)
+├── colab/         # voice-clone notebooks — run locally in Jupyter, not Colab
+│                   #   (name is a holdover from the very first attempt;
+│                   #    see docs/JOURNEY.md)
+├── scripts/       # audio/video prep utilities
+├── media/         # ALL raw/generated media (voice samples, base footage,
+│                   #   toon portraits, renders) — gitignored entirely
+├── docs/
+│   ├── JOURNEY.md          # the full build log — dead ends included, dated
+│   └── ACKNOWLEDGMENTS.md  # every upstream project this depends on, credited honestly
+└── environment-voice.yml   # voice-clone env (conda)
 ```
-MuseTalk itself is cloned by `setup_avatar_mac.sh`, not vendored in this repo.
+MuseTalk and LivePortrait are both cloned by their setup scripts, not
+vendored in this repo.
 
 ## Ethics, non-negotiable
 - Clone **only your own voice and face**, or with the explicit, informed
@@ -129,12 +153,12 @@ MuseTalk itself is cloned by `setup_avatar_mac.sh`, not vendored in this repo.
 ## Giving back
 Bugs found while building this get reported upstream, not just worked around
 locally — e.g. [MuseTalk #427](https://github.com/TMElyralab/MuseTalk/issues/427).
-More context on each dependency's rough edges: [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md).
+More context on each dependency's rough edges: [docs/ACKNOWLEDGMENTS.md](docs/ACKNOWLEDGMENTS.md).
 
 ## License
 This repo has no `LICENSE` file yet — add one before calling it done (MIT
 would keep it in the spirit of everything it depends on). Upstream project
-licenses are listed in [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md).
+licenses are listed in [docs/ACKNOWLEDGMENTS.md](docs/ACKNOWLEDGMENTS.md).
 
 ## Journey log
 Every step, fix, and dead end, dated: [docs/JOURNEY.md](docs/JOURNEY.md)
