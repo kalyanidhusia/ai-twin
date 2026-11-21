@@ -1,0 +1,21 @@
+name: ai-twin-sadtalker
+# SadTalker's own docs pin python=3.8, but that's 2023-era guidance and py3.8
+# is EOL — conda-forge's current pytorch builds for osx-arm64 don't go back
+# that far, so python=3.8 here silently solved to osx-64/Rosetta instead of
+# failing loudly. Bumped to 3.10 to match your other arm64-native envs
+# (ai-twin-motion is also py3.10). Create this with CONDA_SUBDIR=osx-arm64 set
+# (see setup instructions) so the solver can't drift back to osx-64 again.
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pytorch
+  - torchvision
+  - torchaudio
+  - ffmpeg
+  - git
+  - dlib        # prebuilt osx-arm64 binary on conda-forge — pulling this via pip
+                # tries to compile dlib's bundled libpng from source and fails
+                # on Apple Silicon ("fatal error: 'fp.h' file not found")
+  - pip
