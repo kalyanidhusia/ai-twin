@@ -98,3 +98,105 @@
 - [x] Shoot/trim one static 60–90s chest-up base video → `check_base_video.sh`
 - [x] Avatar step (SadTalker portrait route first) — needs CUDA → NRP or Colab
 - [ ] Optional quality ladder if wanted: Chatterbox V3 / dedicated Hindi finetune
+## 2026-11-21 — Toon Avatar: Why It Looked "Off," and the Plan to Fix It
+
+### TL;DR (30-second read)
+We built a pipeline to animate an illustrated cartoon version of Kalyani using her own cloned voice. The first full result worked technically (right length, right audio, mouth actually moving) but looked wrong — like a real human mouth had been pasted onto a cartoon face. We tested a second tool (SadTalker) and got the same underlying issue. We then ran a structured, zero-cost research pass to understand why, and the answer turned out to be more specific — and more fixable — than it first looked: **the face-tracking part of the pipeline works fine on this character; it's specifically the part that draws the mouth that was never trained on anything but real human mouths.** The new plan keeps the parts that work and replaces only the part that doesn't.
+
+---
+
+### The goal, in plain English
+
+Kalyani is building a personal "AI twin" — a video of herself (and a cartoon version of herself) that talks in her own cloned voice, in English and Hindi, for short social videos. Everything is free, open-source, and runs on her own Mac or free academic computing — no paid subscriptions, no sending data to a company's servers.
+
+There are two "twins" in this project:
+- **Human Twin** — uses a real photo/video of Kalyani. The tools involved were built and tested on real human faces, so this track mostly works as expected.
+- **Toon Twin** — uses an AI-illustrated, Pixar-style cartoon portrait of Kalyani. This is the one giving trouble, and it's the subject of this update.
+
+### The journey so far
+
+```mermaid
+flowchart TD
+    T1[Voice cloning working<br/>Chatterbox TTS — English + Hindi] --> T2[LivePortrait motion test<br/>on the toon portrait — mouth barely moved]
+    T2 --> T3[Adjusted settings<br/>mouth moves now, but Kalyani's verdict: 'not realistic at all']
+    T3 --> T4[Added MuseTalk for lip-sync<br/>— first full pipeline result]
+    T4 --> T5[Kalyani's verdict:<br/>'real mouth/eyes from my base video<br/>superimposed on the toon video']
+    T5 --> T6[Tested SadTalker as an alternative<br/>— sharper picture, same core issue]
+    T6 --> T7[Ran 3 parallel zero-cost research studies:<br/>architecture • hardware • identity-consistency]
+    T7 --> T8[Kalyani's own test data corrected the research:<br/>face-tracking works fine — it's the mouth generator]
+    T8 --> T9[Next: prototype the 'split-face' hybrid fix]
+```
+
+### What we built, and what it actually does
+
+```mermaid
+flowchart LR
+    A[AI Twin Project] --> B["Human Twin<br/>(real photo/video)"]
+    A --> C["Toon Twin<br/>(illustrated Pixar-style portrait)"]
+    B --> D["LivePortrait + MuseTalk<br/>✅ works — both tools were built<br/>and trained on real human faces"]
+    C --> E["Same two tools, same settings<br/>❌ output looks like a real mouth<br/>pasted onto the cartoon face"]
+```
+
+**What each tool actually does, in plain language:**
+- **LivePortrait** — watches a video of Kalyani's real head moving and copies that motion (head tilt, blinks, nods) onto a still portrait. It does not listen to audio at all.
+- **MuseTalk** — listens to the cloned-voice audio and redraws just the mouth area, frame by frame, to match the words being spoken.
+- **SadTalker** — a different tool that does both of the above (motion + mouth) in one single step instead of two.
+- **Rhubarb Lip Sync** — a much older, simpler, non-AI tool: it listens to audio and outputs a timing chart saying "mouth shape A from 0.2s to 0.5s, shape C from 0.5s to 0.9s," etc. It doesn't draw anything itself — it tells something else when to show a pre-made mouth-shape picture.
+- **LoRA (fine-tuning)** — a way of showing an AI image model 15–30 pictures of one specific character so it learns to draw *that* character consistently, in new poses/outfits, instead of drawing a generic face each time.
+
+### The problem we found, step by step
+
+```mermaid
+flowchart LR
+    I["Toon portrait image"] --> F["Step 1: Find the face<br/>✅ works fine —<br/>the Pixar-style render has real<br/>nose/eye-socket geometry to track"]
+    F --> M["Step 2: Move the head<br/>LivePortrait<br/>✅ works — copies motion from a driving video"]
+    M --> MT["Step 3: Draw the mouth<br/>MuseTalk<br/>⚠️ only ever trained on real human mouths & teeth"]
+    MT --> O["Result: head moves naturally,<br/>but the mouth looks like a real<br/>human mouth grafted onto cartoon skin"]
+```
+
+The important nuance here, confirmed by checking MuseTalk's own code directly: it genuinely does use a legitimate pose/landmark detector (called DWPose) that works fine on a 3D-style cartoon face — this matches Kalyani's own result of successfully tracking all 437 frames of the test clip. So **the detection step is not the problem.** The problem is narrower and more specific: the *mouth-drawing* step was built exclusively on footage of real people talking, so it doesn't know how to draw a mouth in the character's own illustrated style — it just draws a realistic human mouth, wherever the mouth should be.
+
+### What the zero-cost research confirmed
+
+We ran three independent research passes (architecture comparison, hardware feasibility, identity consistency) before committing to any next step. Headlines:
+
+- **No open-source tool we found — not one — has verified, documented proof it works well on illustrated/cartoon faces.** Every one of them (SadTalker, Hallo, EchoMimic, AniPortrait, V-Express, LatentSync, LivePortrait, MuseTalk) was built and tested on real human faces. One tool's own demo video claiming to show "anime" results turned out to be borrowed footage from a *different* company's model — not its own output. This is a real, field-wide gap, not something unique to Kalyani's setup.
+- **Only one tool (LivePortrait) has official support for running on a Mac at all** — and even that is roughly 20x slower than a dedicated gaming GPU, by the tool's own documentation. Everything else expects a Linux computer with an NVIDIA graphics card.
+- **For free cloud computing:** Google Colab's free tier is real but Google doesn't promise which graphics card you'll get or for how long. Kalyani's academic computing allocation (NRP/Nautilus, through UAMS/Arkansas INBRE) is structurally the better free option — real, more powerful graphics cards, no surprise cutoffs — as long as it's used deliberately and not left idling.
+- **For keeping the cartoon character looking like "herself" across different outfits/backgrounds:** the popular easy tools for this (IP-Adapter, InstantID, PhotoMaker) are all built to recognize *real human faces* — one of them, PhotoMaker, literally tells its own users to avoid cartoon-style images. The one method that doesn't have this problem is LoRA fine-tuning (teaching the AI 15-30 pictures of the specific character).
+
+### The plan: a "split-face" hybrid, instead of starting over
+
+Because the head-motion part already works and only the mouth-drawing part is the problem, the fix doesn't need to throw out everything and start from scratch — it needs to replace one piece.
+
+```mermaid
+flowchart LR
+    I2["Toon portrait image"] --> F2["Find the face ✅"]
+    F2 --> M2["Move head, eyes, eyebrows<br/>LivePortrait ✅"]
+    V["Cloned voice audio<br/>(English + Hindi)"] --> R["Rhubarb Lip Sync<br/>turns speech into a<br/>mouth-shape timing chart"]
+    R --> S["Swap in hand-drawn mouth<br/>shapes matching the<br/>character's own art style"]
+    M2 --> X["Combine the two:<br/>real head motion +<br/>toon-style mouth"]
+    S --> X
+    X --> O2["Result: the character's<br/>own head moving, with a<br/>mouth drawn in its own style"]
+```
+
+This is not a brand-new invention — it's a recognized pattern in the lip-sync research field ("mask-based" dubbing, where only the mouth region is edited and everything else is left alone). MuseTalk itself already works this way internally; we're proposing to swap *what* fills that mouth region — a hand-styled viseme instead of a real-face AI generation.
+
+**One known risk to test for, not assume away:** when you paste a new mouth onto an existing frame, the edges can show a visible seam if the lighting/style doesn't match exactly. For a flat illustration this is more forgiving than for a photo-real face, but it's the first thing to check once this is prototyped.
+
+### Zero-cost hardware map
+
+| Option | Cost | Good for | The catch |
+|---|---|---|---|
+| Kalyani's Mac (Apple Silicon) | $0, always on hand | Rhubarb (needs no GPU at all), LivePortrait motion | LivePortrait runs ~20x slower than a gaming PC, by its own documentation |
+| Google Colab (free tier) | $0 | A quick one-off test | Google does not guarantee which graphics card or how long a session lasts |
+| NRP / Nautilus (academic allocation via UAMS/Arkansas INBRE) | $0 | Longer, repeatable test/training runs | Must be used deliberately — leaving a graphics card idling can get an account flagged |
+
+### What to test next (open questions)
+
+1. Does Rhubarb's speech-timing accuracy hold up on real Hindi audio, including sounds English doesn't have? (Planned, not yet run.)
+2. Does the hybrid "split-face" composite actually blend cleanly, or is there a visible seam around the mouth? (Not yet built.)
+3. Does a LoRA trained on the toon character actually help with outfit/background consistency once there's motion involved, not just still images? (Not yet tested — the research only confirmed LoRA for still images.)
+
+### Standing ground rules carried through this entire project
+No religious content. No email/calendar access. Nothing posted anywhere without Kalyani's explicit approval. Voice cloning only with explicit consent. No biometric media (face/voice/video) ever committed to this git repo — this note is text and diagrams only, by design. Conda-first installs; pip only when conda genuinely has no package. Free/open-source/self-hosted tools only — no paid APIs.
