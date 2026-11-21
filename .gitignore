@@ -15,3 +15,15 @@ media/
 archive/
 *.tar.gz
 avatar/MuseTalk/
+*.pkl
+*.pth
+*.safetensors
+*.onnx
+*.ckpt
+*.bin
+results/
+out/
+prepared/
+outputs/
+__pycache__/
+*.log
