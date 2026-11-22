@@ -200,3 +200,31 @@ This is not a brand-new invention — it's a recognized pattern in the lip-sync 
 
 ### Standing ground rules carried through this entire project
 No religious content. No email/calendar access. Nothing posted anywhere without Kalyani's explicit approval. Voice cloning only with explicit consent. No biometric media (face/voice/video) ever committed to this git repo — this note is text and diagrams only, by design. Conda-first installs; pip only when conda genuinely has no package. Free/open-source/self-hosted tools only — no paid APIs.
+
+### Toon portrait stylization + SadTalker re-test — in progress
+
+Picked a base portrait, found it was photorealistic rather than stylized, fixed that with
+a free/self-hosted SDXL + LoRA (`ntc-ai/SDXL-LoRA-slider.pixar-style`, MIT license)
+image-to-image pass, run locally via `diffusers` on Apple Silicon (MPS). Three stylization
+strengths were generated (mild/medium/strong); **mild** was chosen as the best balance of
+stylization vs. identity preservation.
+
+Re-ran the existing SadTalker pipeline (previously closed as a dead end for a toon face)
+against this new "mild" portrait, using the original generic test sentence
+(`twin_hi_test.wav`). Result: lip-sync looked convincing on direct frame inspection. This
+reopens the question of whether SadTalker alone is sufficient — possibly making the whole
+Rhubarb + hand-drawn-mouth-art + split-face-hybrid plan unnecessary.
+
+**Not yet answered:** whether SadTalker's mouth shapes hold up specifically on
+retroflex/aspirated Hindi consonants (ट ठ ड ढ ड़ ढ़ ख घ छ झ थ ध फ भ) — the exact sound
+category validated against Rhubarb earlier today
+(`viseme/reference/retroflex_aspirated_wordlist.csv`, 140 words, confirmed reliable). The
+test sentence used tonight didn't contain these sounds, so this is still open, not settled.
+
+Also flagged: the `base_hi.mp4` LivePortrait driving video is washed out/overexposed and
+needs a reshoot if the split-face hybrid path ends up being needed.
+
+**Next session starts here:** generate a short cloned-voice (Chatterbox TTS) Hindi clip
+covering all 14 retroflex/aspirated categories, rerun SadTalker against the mild portrait
+with that clip, and visually check the closures frame-by-frame. That result decides
+whether the architecture question is actually closed.

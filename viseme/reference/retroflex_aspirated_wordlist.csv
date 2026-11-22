@@ -1,0 +1,141 @@
+seq,category_num,phoneme,word,transliteration,gloss
+1,1,T,टमाटर,tamaatar,tomato
+2,1,T,टोपी,topi,cap
+3,1,T,टेबल,table,table
+4,1,T,टुकड़ा,tukda,piece
+5,1,T,छोटी,chhoti,small
+6,1,T,मिट्टी,mitti,soil
+7,1,T,रोटी,roti,flatbread
+8,1,T,मोटर,motor,motor
+9,1,T,नटखट,natkhat,playful
+10,1,T,पेट,pet,stomach
+11,2,Th,ठंडा,thanda,cold
+12,2,Th,ठीक,theek,fine
+13,2,Th,ठहरना,thaharna,to pause
+14,2,Th,ठेला,thela,cart
+15,2,Th,ठोकर,thokar,stumble
+16,2,Th,मीठा,meetha,sweet
+17,2,Th,अंगूठी,angoothi,ring
+18,2,Th,बैठक,baithak,sitting room
+19,2,Th,कठिन,kathin,difficult
+20,2,Th,पाठ,paath,lesson
+21,3,D,डिब्बा,dibba,box
+22,3,D,डाली,daali,branch
+23,3,D,डर,dar,fear
+24,3,D,डोर,dor,string
+25,3,D,डमरू,damru,small drum
+26,3,D,निडर,nidar,fearless
+27,3,D,ठंडक,thandak,coolness
+28,3,D,अंडा,anda,egg
+29,3,D,मुंडेर,munder,parapet
+30,3,D,पंडित,pandit,scholar
+31,4,Dh,ढक्कन,dhakkan,lid
+32,4,Dh,ढीला,dheela,loose
+33,4,Dh,ढाल,dhaal,slope/shield
+34,4,Dh,ढोल,dhol,drum
+35,4,Dh,ढेर,dher,pile
+36,4,Dh,ढंग,dhang,manner
+37,4,Dh,ढलान,dhalaan,incline
+38,4,Dh,मेंढक,mendhak,frog
+39,4,Dh,निढाल,nidhaal,exhausted
+40,4,Dh,ढूँढना,dhoondhna,to search
+41,5,R_flap,सड़क,sadak,road
+42,5,R_flap,पेड़,ped,tree
+43,5,R_flap,पहाड़,pahaad,mountain
+44,5,R_flap,कपड़ा,kapda,cloth
+45,5,R_flap,लड़का,ladka,boy
+46,5,R_flap,घड़ी,ghadi,clock
+47,5,R_flap,बड़ा,bada,big
+48,5,R_flap,जोड़ना,jodna,to join
+49,5,R_flap,दौड़ना,daudna,to run
+50,5,R_flap,भीड़,bheed,crowd
+51,6,Rh_flap,पढ़ना,padhna,to read
+52,6,Rh_flap,चढ़ना,chadhna,to climb
+53,6,Rh_flap,बढ़ना,badhna,to grow
+54,6,Rh_flap,सीढ़ी,seedhi,ladder/stairs
+55,6,Rh_flap,दाढ़ी,daadhi,beard
+56,6,Rh_flap,गाढ़ा,gaadha,thick
+57,6,Rh_flap,बूढ़ा,boodha,elderly
+58,6,Rh_flap,कढ़ाई,kadhaai,embroidery
+59,6,Rh_flap,गढ़ना,gadhna,to craft
+60,6,Rh_flap,लुढ़कना,ludhakna,to roll
+61,7,Kh,खिड़की,khidki,window
+62,7,Kh,खुशबू,khushboo,fragrance
+63,7,Kh,खाना,khaana,food
+64,7,Kh,खेल,khel,game
+65,7,Kh,खामोशी,khaamoshi,silence
+66,7,Kh,लिखना,likhna,to write
+67,7,Kh,देखना,dekhna,to see
+68,7,Kh,अख़बार,akhbaar,newspaper
+69,7,Kh,आँख,aankh,eye
+70,7,Kh,सुख,sukh,comfort
+71,8,Gh,घर,ghar,home
+72,8,Gh,घंटा,ghanta,bell/hour
+73,8,Gh,घूमना,ghoomna,to stroll
+74,8,Gh,घना,ghana,dense
+75,8,Gh,घूँट,ghoont,sip
+76,8,Gh,घड़ा,ghada,clay pot
+77,8,Gh,घाटी,ghaati,valley
+78,8,Gh,घबराना,ghabraana,to panic
+79,8,Gh,सुघड़,sughad,well-crafted
+80,8,Gh,मेघ,megh,cloud
+81,9,Chh,छत,chhat,roof
+82,9,Chh,छतरी,chhatri,umbrella
+83,9,Chh,छाया,chhaaya,shadow
+84,9,Chh,छोड़ना,chhodna,to leave
+85,9,Chh,छलनी,chhalni,sieve
+86,9,Chh,मछली,machhli,fish
+87,9,Chh,बछड़ा,bachhda,calf
+88,9,Chh,पूछना,poochhna,to ask
+89,9,Chh,कुछ,kuch,some
+90,9,Chh,स्वच्छ,swachh,clean
+91,10,Jh,झरना,jharna,waterfall
+92,10,Jh,झील,jheel,lake
+93,10,Jh,झूला,jhoola,swing
+94,10,Jh,झटपट,jhatpat,quickly
+95,10,Jh,झाड़ी,jhaadi,bush
+96,10,Jh,झोंका,jhonka,gust
+97,10,Jh,समझना,samajhna,to understand
+98,10,Jh,उलझन,uljhan,confusion
+99,10,Jh,सुलझाना,suljhaana,to resolve
+100,10,Jh,बोझ,bojh,burden
+101,11,Th_dental,थाली,thaali,plate
+102,11,Th_dental,थकान,thakaan,fatigue
+103,11,Th_dental,थोड़ा,thoda,a little
+104,11,Th_dental,थैला,thaila,bag
+105,11,Th_dental,थामना,thaamna,to hold
+106,11,Th_dental,हाथ,haath,hand
+107,11,Th_dental,साथ,saath,together
+108,11,Th_dental,पत्थर,patthar,stone
+109,11,Th_dental,कथा,katha,story
+110,11,Th_dental,रथ,rath,chariot
+111,12,Dh_dental,धीरे,dheere,slowly
+112,12,Dh_dental,धूप,dhoop,sunlight
+113,12,Dh_dental,धूल,dhool,dust
+114,12,Dh_dental,धुन,dhun,melody
+115,12,Dh_dental,धनिया,dhaniya,coriander
+116,12,Dh_dental,ध्यान,dhyaan,attention
+117,12,Dh_dental,धागा,dhaaga,thread
+118,12,Dh_dental,आधा,aadha,half
+119,12,Dh_dental,सुधार,sudhaar,improvement
+120,12,Dh_dental,दूध,doodh,milk
+121,13,Ph,फूल,phool,flower
+122,13,Ph,फल,phal,fruit
+123,13,Ph,फिसलना,phisalna,to slip
+124,13,Ph,फैसला,faisla,decision
+125,13,Ph,फुहार,phuhaar,drizzle
+126,13,Ph,फैलना,phailna,to spread
+127,13,Ph,सफ़र,safar,journey
+128,13,Ph,लिफ़ाफ़ा,lifaafa,envelope
+129,13,Ph,साफ़,saaf,clean
+130,13,Ph,बर्फ़,barf,ice/snow
+131,14,Bh,भारी,bhaari,heavy
+132,14,Bh,भीतर,bheetar,inside
+133,14,Bh,भाप,bhaap,steam
+134,14,Bh,भरोसा,bharosa,trust
+135,14,Bh,भोजन,bhojan,meal
+136,14,Bh,भीगना,bheegna,to get wet
+137,14,Bh,सुबह,subah,morning
+138,14,Bh,लाभ,laabh,benefit
+139,14,Bh,शोभा,shobha,grace
+140,14,Bh,निभाना,nibhaana,to fulfill

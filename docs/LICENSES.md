@@ -19,7 +19,7 @@ this project's goal of a fully traceable public tutorial.
 | DreamTalk | MIT tag vs. README's "RESEARCH/NON-COMMERCIAL USE ONLY" | same | ❌ non-commercial | Abandoned — no commits since Jan 2024, checkpoints no longer downloadable | Verified (and abandoned) |
 | Hallo / Hallo2 / Hallo3 | Not found in research | Not found | Unknown | — | **Not verified** |
 | Wav2Lip + derivatives | Not retrieved in research | Not retrieved | Unknown | — | **Not verified** |
-| Rhubarb Lip Sync (DanielSWolf) | Tagged "other" in repo metadata | n/a — no model weights | Unknown | **Action: read LICENSE.md in the repo directly before any use beyond personal, especially before sharing publicly** | **Not verified** |
+| Rhubarb Lip Sync (DanielSWolf) | MIT License | MIT (third-party deps are MIT/BSD/similar permissive) | Confirmed commercial-OK — LICENSE.md states "you can use Rhubarb Lip Sync in almost any way you want, including the creation of commercial software based on it" | Verified directly against LICENSE.md, 2026-11-21 | Verified |
 | HunyuanVideo-Avatar (Tencent) | Tencent Hunyuan Community License Agreement — custom, not OSI-standard | same | ⚠️ Excludes EU/UK/South Korea from authorized use; doesn't block US use but is non-standard | Also ruled out on hardware — 24–96GB VRAM, infeasible for this project regardless of license | Verified |
 | IP-Adapter FaceID / InstantID / PhotoMaker | Not confirmed in research | Not confirmed | Unknown | Already ruled out on technical grounds — all three depend on real-face-recognition backbones unsuited to toon input | **Not verified — low priority, already disqualified** |
 
